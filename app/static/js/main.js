@@ -129,9 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Create a temporary div to measure text
         const tempDiv = document.createElement('div');
+        const container = document.querySelector('.tab-content');
+        const defaultWidth = 600; // Fallback width if container not found
+        const containerWidth = container ? container.offsetWidth : defaultWidth;
+        
         tempDiv.style.cssText = `
             position: absolute;
-            width: ${document.querySelector('table').offsetWidth * 0.6}px;
+            width: ${containerWidth * 0.6}px;
             visibility: hidden;
             font-size: inherit;
             line-height: 1.2em;
