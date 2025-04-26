@@ -1,0 +1,182 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.search-container {
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.required {
+    color: red;
+    margin-left: 2px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#clearBtn {
+    background-color: #6c757d;
+}
+
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+input:invalid {
+    border-color: #dc3545;
+}
+
+.tabs {
+    margin-top: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+td:first-child {
+    background-color: #f8f9fa;
+    width: 200px;
+    font-weight: bold;
+}
+
+td:nth-child(2) {
+    text-align: right;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    td {
+        padding: 8px;
+    }
+    
+    td:first-child {
+        width: 150px;
+    }
+}
+
+.description-cell {
+    /* Set line height to ensure consistent line heights */
+    line-height: 1.2em;
+    /* Set max height to 5 lines (1.2em * 5 = 6em) */
+    max-height: 6em;
+    overflow: hidden;
+    /* Enable webkit line clamp */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    /* Ensure ellipsis shows */
+    text-overflow: ellipsis;
+    /* Prevent text wrapping issues */
+    white-space: normal;
+    /* Add some padding */
+    padding: 10px;
+}
+
+/* Ensure the table cell can handle the overflow properly */
+td.description-container {
+    padding: 0 !important;
+    vertical-align: top;
+} 
