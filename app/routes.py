@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request, session
 from app import app
 import requests
 from datetime import datetime
@@ -113,7 +113,8 @@ def get_stock_summary(symbol):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    last_searched_symbol = session.get('last_searched_symbol', '')
+    return render_template('index.html', last_searched_symbol=last_searched_symbol)
 
 @app.route('/api/stock/<symbol>')
 def get_stock_data(symbol):
@@ -123,6 +124,7 @@ def get_stock_data(symbol):
             return jsonify({'error': 'Please enter a stock symbol'}), 400
             
         symbol = symbol.strip().upper()
+        session['last_searched_symbol'] = symbol  # Save the symbol in session
         logger.info(f"Processing request for symbol: {symbol}")
         
         try:

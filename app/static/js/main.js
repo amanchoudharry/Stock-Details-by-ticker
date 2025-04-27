@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Ensure input value is maintained
             const symbol = stockSymbolInput.value.trim();
             if (symbol) {
-                stockSymbolInput.value = symbol;  // ✅ Maintain input value during tab switches
+                stockSymbolInput.value = symbol; 
             }
         });
     });
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create a temporary div to measure text
         const tempDiv = document.createElement('div');
         const container = document.querySelector('.tab-content');
-        const defaultWidth = 600; // Fallback width if container not found
+        const defaultWidth = 600;
         const containerWidth = container ? container.offsetWidth : defaultWidth;
         
         tempDiv.style.cssText = `
@@ -154,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return description;
         }
         
-        // Binary search to find the right truncation point
         let start = 0;
         let end = description.length;
         let bestFit = '';
