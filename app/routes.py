@@ -5,6 +5,7 @@ from datetime import datetime
 from config import Config
 import json
 import logging
+import re
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -76,10 +77,7 @@ def get_stock_summary(symbol):
         change_percent = round((change / prev_close * 100), 2) if prev_close != 0 else 0
         
         # Format timestamp to show only the date
-        trading_day = datetime.strptime(
-            data.get('timestamp', ''), 
-            '%Y-%m-%dT%H:%M:%S%z'
-        ).strftime('%Y-%m-%d')
+        trading_day = parse_tiingo_timestamp(data.get('timestamp', '')).strftime('%Y-%m-%d')
         
         # Format numeric values with proper handling of None
         def format_number(value):
@@ -110,6 +108,24 @@ def get_stock_summary(symbol):
     except requests.exceptions.RequestException as e:
         logger.error(f"Error fetching stock summary: {str(e)}")
         raise Exception(f"Error fetching stock summary: {str(e)}")
+
+def parse_tiingo_timestamp(ts):
+    """
+    Parses a Tiingo timestamp string, normalizing fractional seconds to microseconds (6 digits).
+    """
+    match = re.match(r"(.*T\d{2}:\d{2}:\d{2})(\.\d+)?([+-]\d{2}:\d{2})", ts)
+    if match:
+        base, fraction, tz = match.groups()
+        # If there's a fraction, truncate or pad to 6 digits for microseconds
+        if fraction:
+            fraction = (fraction + "000000")[:7]  # includes the dot
+        else:
+            fraction = ".000000"
+        ts_fixed = f"{base}{fraction}{tz}"
+        return datetime.strptime(ts_fixed, "%Y-%m-%dT%H:%M:%S.%f%z")
+    else:
+        # Fallback if no fractional seconds
+        return datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S%z")
 
 @app.route('/')
 def index():
